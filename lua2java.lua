@@ -17,6 +17,10 @@ local LONG_FORMAT = [[
 	public static final long %s = %s;
 ]]
 
+local BOOL_FORMAT = [[
+	public static final boolean %s = %s;
+]]
+
 local arg = {...}
 for i, v in pairs(arg) do
 	print(i, v)
@@ -40,10 +44,12 @@ for i, v in ipairs(ret) do
 		format_ = INT_FORMAT
 	elseif mode == 'L' then
 		format_ = LONG_FORMAT
+	elseif mode == 'B' then
+		format_ = BOOL_FORMAT
 	end
 
 	if format_ then
-		file:write(string.format(format_, v[2], v[3]))
+		file:write(string.format(format_, tostring(v[2]), tostring(v[3])))
 	else
 		print('skip', i)
 	end
